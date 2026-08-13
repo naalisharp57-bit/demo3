@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Yield Prediction &amp; Decision Support</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Crop Yield Prediction &amp; Decision Support</h1>
+    <p>Enter your field data to get a yield estimate and tailored farming advice.</p>
+  </header>
+
+  <main class="card">
+    <form action="{{ url_for('predict') }}" method="post" class="grid">
+      <div class="field">
+        <label for="location">Location / Region</label>
+        <select id="location" name="location" required>
+          {% for l in locations %}<option value="{{ l }}">{{ l|capitalize }}</option>{% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="crop_type">Crop type</label>
+        <select id="crop_type" name="crop_type" required>
+          {% for c in crops %}<option value="{{ c }}">{{ c|capitalize }}</option>{% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sowing_date">Sowing date</label>
+        <input type="date" id="sowing_date" name="sowing_date" required />
+      </div>
+
+      <div class="field">
+        <label for="soil_ph">Soil pH</label>
+        <input type="number" step="0.1" min="3" max="10" id="soil_ph" name="soil_ph" value="6.5" required />
+      </div>
+
+      <div class="field">
+        <label for="soil_n">Nitrogen N (kg/ha)</label>
+        <input type="number" step="0.1" id="soil_n" name="soil_n" value="80" required />
+      </div>
+
+      <div class="field">
+        <label for="soil_p">Phosphorus P (kg/ha)</label>
+        <input type="number" step="0.1" id="soil_p" name="soil_p" value="40" required />
+      </div>
+
+      <div class="field">
+        <label for="soil_k">Potassium K (kg/ha)</label>
+        <input type="number" step="0.1" id="soil_k" name="soil_k" value="50" required />
+      </div>
+
+      <div class="field">
+        <label for="org_carbon">Organic carbon (%)</label>
+        <input type="number" step="0.01" id="org_carbon" name="org_carbon" value="0.7" required />
+      </div>
+
+      <div class="field">
+        <label for="avg_rainfall">Avg weekly rainfall (mm)</label>
+        <input type="number" step="0.1" id="avg_rainfall" name="avg_rainfall" value="55" required />
+      </div>
+
+      <div class="field">
+        <label for="avg_temp">Avg temperature (&deg;C)</label>
+        <input type="number" step="0.1" id="avg_temp" name="avg_temp" value="24" required />
+      </div>
+
+      <div class="field">
+        <label for="avg_humidity">Avg humidity (%)</label>
+        <input type="number" step="0.1" id="avg_humidity" name="avg_humidity" value="65" required />
+      </div>
+
+      <div class="field full">
+        <button type="submit">Predict yield</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

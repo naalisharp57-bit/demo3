@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Prediction Result</h1>
+  </header>
+
+  <main class="card">
+    <div class="result-top">
+      <div>
+        <p class="muted">Predicted yield for {{ crop|capitalize }}</p>
+        <p class="pred">{{ pred }} <span>tons/ha</span></p>
+      </div>
+      <span class="badge badge-{{ advice.label|lower }}">{{ advice.label }} yield</span>
+    </div>
+
+    <p class="headline">{{ advice.headline }}</p>
+
+    <h2>Recommendations</h2>
+    <ul class="tips">
+      {% for tip in advice.tips %}<li>{{ tip }}</li>{% endfor %}
+    </ul>
+
+    <a class="back" href="{{ url_for('index') }}">&larr; Try another prediction</a>
+  </main>
+</body>
+</html>
